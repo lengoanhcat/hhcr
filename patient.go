@@ -95,12 +95,19 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("query is running " + function)
 
-	// Handle different functions
-	if function == "dummy_query" {//read a variable
-		fmt.Println("hi there " + function)//error
+	// Handle different functions	
+	if function == "query_doa" {//read a variable		
+		name,_ := stub.GetState("Name")
+		doa,_ := stub.GetState("DOA")
+		
+		fmt.Println("Name: " + string(name)) //error
+		fmt.Println("Date of Appointment: " + string(doa))
 		return nil, nil;
 	}
 	fmt.Println("query did not find func: " + function)//error
 
 	return nil, errors.New("Received unknown function query: " + function)
 }
+
+
+
