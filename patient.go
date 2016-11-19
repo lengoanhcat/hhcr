@@ -27,8 +27,8 @@ func main() {
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	
 	var id int
-	var name string // Entities
-	var dob Time // date of birth and date of appointment
+	var name string // Entities	
+	var dob time.Time
 	var err error	
 
 	if len(args) != 3 {
@@ -36,12 +36,13 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	}
 
 	// Initialize IDs
+	const shortForm = "2006-Jan-02"
 	id,err = strconv.Atoi(args[0])
 	name = args[1]
-	dob,err = Parse(args[2])	
+	dob,err = time.Parse(shortForm,args[2])	
 
 	// Put data into world stage
-	err = stub.PutState("Id", []byte(id))
+	err = stub.PutState("Id", []byte(strconv.Itoa(id)))
 	if err != nil {
 		return nil,err
 	}
@@ -51,7 +52,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 		return nil,err
 	}
 	
-	err = stub.PutState("DOB", []byte(name))
+	err = stub.PutState("DOB", []byte(dob.String()))
 	if err != nil {
 		return nil,err
 	}
@@ -71,15 +72,17 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	// Read in the name of the appointment to be updated	
 
 	if function == "book_appointment" { //book an appointment
-		var doa Time
-		doa = Parse(args[0])
-		stub.putState("DOA",[]byte(doa)) // date of appointment
+		var doa time.Time		
+		const RFC850 = "Monday, 02-Jan-06 15:04:05 MST"
+		doa,_ = time.Parse(RFC850,args[0])
+		stub.PutState("DOA",[]byte(doa.String())) // date of appointment
 	}
 
-	if function == "cancel_appointment" { // cancel an appointment
-		var doa Time
-		doa = Parse(args[0])
-		stub.putState("DOA",[]byte(doa))
+	if function == "cancel_appointment" { // cancel an appointment		
+		stub.PutState("DOA",[]byte(""))
+	}
+
+	if function == "" { //
 	}
 	
 	fmt.Println("invoke did not find func: " + function)//error
@@ -101,7 +104,3 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 
 	return nil, errors.New("Received unknown function query: " + function)
 }
-
-
-
-
