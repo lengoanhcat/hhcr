@@ -1,19 +1,48 @@
 # HHCR: hyperledger healthcare record
 
-There are four nodes in the system:
+## Draft scenario - written by Paul:
 
-Patient:
+1. Patient born, allocated NHS ID 
+2. Patient registers NHS ID with GP
+3. Patient requests GP consultation
+4. Patient consults GP
+5. GP outlines options to patient
+..1. Discussion only
+..2. GP performs local tests
+..3. Prescription
+..4. Refer patient to consultant
+...1. Consultant offers appointment to patient
+...2. Patient consults consultant
+...3. Consultant outlines options to patient
+...4. Discussion only
+...5. Consultancy tests & scans
+...6. Prescription
+...7. Patient elects surgery
+6. Patient consults pharmacist
+..1. Discussion only
+..2. Over the counter medicine
+..3. Refer patient to GP
+..4. Pharmacist dispense prescription
+7. Patient dies
 
-has following functions: register(), make_appointment(), query()
+## System Overview
 
-General Practitioner:
+1. Patient has following functions
+..1. register()
+..2. make_appointment()
+..3. query()
 
-has following functions: diagnose(), prescribe_drugs(), query()
+2. General Practitioner has following functions:
+..1. diagnose()
+..2. prescribe_drugs()
+..3. query()
 
-Hospital:
+3. Hospital has following functions:
+..1. diagnose()
 
-has following functions: diagnose()
+4. Pharmacy has following functions:
+..1. sell_drugs(), query()
 
-Pharmacy:
 
-has following functions: sell_drugs(), query()
+
+
