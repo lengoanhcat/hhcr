@@ -1,6 +1,9 @@
 # HHCR: hyperledger healthcare record
 
-## Draft scenario - written by Paul:
+## 
+![alt tag](https://github.com/lengoanhcat/hhcr/blob/master/hhcr.png)
+
+## Usercase Scenario
 
 1. Patient born, allocated NHS ID 
 2. Patient registers NHS ID with GP
