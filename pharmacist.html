@@ -1,0 +1,137 @@
+<html>
+<head>
+   <!-- Latest compiled and minified CSS -->
+<!-- Latest compiled and minified CSS -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blockchain</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+    	
+jQuery(document).ready( function () {
+        $("#append").click( function(e) {
+          e.preventDefault();
+        $(".inc").append('<div class="controls">\
+                <input class="form-control" type="text" name="textbox" placeholder="Medecine"><br>\
+                <input class="form-control" type="text" name="text" placeholder="Dosage"><br>\
+                <a href="#" class="remove_this btn btn-danger">remove</a>\
+                <br>\
+                <br>\
+            </div>');
+        return false;
+        });
+
+    jQuery(document).on('click', '.remove_this', function() {
+        jQuery(this).parent().remove();
+        return false;
+        });
+    $("input[type=submit]").click(function(e) {
+      e.preventDefault();
+      $(this).next("[name=textbox]")
+      .val(
+        $.map($(".inc :text"), function(el) {
+          return el.value
+        }).join(",\n")
+      )
+    })
+  });
+    </script>
+    </head>
+    <body>
+  <div class="container-fluid">
+    <div class="container">
+          <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Home</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        
+        <li><a href="patiant.html" class="active">Patient</a></li>
+          <li><a href="doctor.html">GP</a></li>
+          <li><a href="consultant.html">Consultant</a></li>
+          <li><a href="pharmacist.html">Pharmacist</a></li>
+     </ul>
+   </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+  <div class="jumbotron">
+    <h1>Pharmacist</h1>
+    <p>...</p>
+  </div>
+  <div class="container">
+    	<div class="row">
+        <div class="col-md-12">
+       <div class="table-responsive">
+             <table id="mytable" class="table table-bordred table-striped">
+                 <thead>
+                 <th>ID </th>
+                    <th>Name</th>
+                     <th>DoB</th>
+                     <th>Patient Visit</th>
+                     <th>GP Notes</th>
+                   </thead>
+    <tbody> 
+    <tr>  
+    <td>144/xyz</td>
+    <td>Jhon</td>
+    <td>02/01/1990</td>
+    <td>04/12/2016</td>
+    <td><p>Notes Details</p></td>
+   </tr>
+  </tbody>
+</table>
+
+         </div>
+        </div>
+	</div>
+
+  
+<form class="form-horizontal" method= "Post">
+    <div class="control-group">
+        <div class="inc">
+            <div class="controls">
+               
+                <input type="text" class="form-control" name="textbox" placeholder="Medecine"/><br>
+                <input type="text" class="form-control" name="text" placeholder="Dosage"/><br>
+                <table><tr><td>
+                <button style="margin-left: 0px" class="btn btn-success" type="submit" id="append" name="append">
+                    Add More</button>
+                       <button style="margin-left: 20px" class="btn btn-info" type="submit" id="#" name="#">
+                Fetch</button>
+                    </td>
+                    </tr>
+                </table>
+               <br>
+            </div>
+        </div>
+                     
+        
+    </div>
+</form>
+   
+  </div><!-- /.container-fluid -->
+
+    </body>
+</html>
