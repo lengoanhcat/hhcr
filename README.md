@@ -7,11 +7,11 @@
 3. Patient requests GP consultation
 4. Patient consults GP
 5. GP outlines options to patient
-..1. Discussion only
-..2. GP performs local tests
-..3. Prescription
-..4. Refer patient to consultant
-....1. Consultant offers appointment to patient
+ 1. Discussion only
+ 2. GP performs local tests
+ 3. Prescription
+ 4. Refer patient to consultant
+.. 1. Consultant offers appointment to patient
 ....2. Patient consults consultant
 ....3. Consultant outlines options to patient
 ....4. Discussion only
