@@ -1,6 +1,6 @@
 <html>
 <head>
-   <!-- Latest compiled and minified CSS -->
+<!-- Latest compiled and minified CSS -->
 <!-- Latest compiled and minified CSS -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -17,15 +17,35 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script>
-  $( function() {
-    $( "#dob" ).datepicker();
-  } );
-        $( function() {
-    $( "#appointment" ).datepicker();
-  } );
+  <script>
+   $( function() {
+       $( "#dob" ).datepicker();
+   });
+   $( function() {
+       $( "#appointment" ).datepicker()
+   } );
+   $(document).ready(function() {
+       // Add an appointment into the patient account
+       $("#book_appointment").click(function() {
+           var name = $("input_name").val();
+           console.log("patient'sname = " name)
+           $.ajax({
+	       beforeSend: function(xhrObj){
+		   xhrObj.setRequestHeader("Content-Type","application/json");
+		   xhrObj.setRequestHeader("Accept","application/json");
+	       },
+	       type: "POST",
+	       url: 'http://localhost:3000/transactions',
+	       data: JSON.stringify({ "name": amount }),
+	       dataType: "json",
+	       success: function(result) {
+		   console.log("Status: " + result.status);
+	       }
+           });
+       });
+   });
   </script>
-    <script>
+   <script>
 
 
 (function ($) {
@@ -209,7 +229,7 @@
                 <form role="form">
                     <div class="form-group float-label-control">
                         <label for="">Name</label>
-                        <input type="text" class="form-control" placeholder="Patient Name">
+                        <input id="input_name" type="text" class="form-control" placeholder="Patient Name">
                     </div>
                     <div class="form-group float-label-control">
                         <label for="">ID</label>
@@ -223,7 +243,7 @@
                         <label for="">Appointment</label>
                         <input type="text" id="appointment" class="form-control" placeholder="Appointment" rows="1" name="appointment">
                     </div>
-                    <button type="button" class="btn btn-primary">Book Appointment</button>
+                    <button id="book_appointment" type="button" class="btn btn-primary">Book Appointment</button>
                        
     </div>
 </div>

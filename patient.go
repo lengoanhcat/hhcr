@@ -69,9 +69,13 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		return t.Init(stub, "init", args)
 	}
 
-	// Read in the name of the appointment to be updated	
-
-	if function == "book_appointment" { //book an appointment
+	// Read in the name of the appointment to be updated
+	if function == "register_with_gp" {
+		gp_id := args[0]
+		stub.PutState("GP",[]byte(gp_id))
+	}
+	// request consultation and book an appointment
+	if function == "request_gp_consultation" { 
 		var doa time.Time		
 		const RFC850 = "Monday, 02-Jan-06 15:04:05 MST"
 		doa,_ = time.Parse(RFC850,args[0])
@@ -79,8 +83,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	}
 
 	if function == "cancel_appointment" { // cancel an appointment		
+		// delete action in Fabric Blockchain
 		stub.PutState("DOA",[]byte(""))
-	}
+	}	
 
 	if function == "" { //
 	}
@@ -96,7 +101,7 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	fmt.Println("query is running " + function)
 
 	// Handle different functions	
-	if function == "query_doa" {//read a variable		
+	if function == "query_appointment" {//read a variable
 		name,_ := stub.GetState("Name")
 		doa,_ := stub.GetState("DOA")
 		
@@ -108,6 +113,3 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 
 	return nil, errors.New("Received unknown function query: " + function)
 }
-
-
-
